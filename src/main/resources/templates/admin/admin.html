@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Admin - Portfólio</title>
-    <link rel="stylesheet" href="/css/admin-style.css">
+    <link rel="stylesheet" href="/static/css/adminstyle.css">
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>📋 Painel de Administração</h1>
+        <h1> Painel de Administração</h1>
         <a href="/" class="btn-voltar">← Voltar ao Portfólio</a>
     </header>
 
     <nav class="tabs">
-        <button class="tab-btn active" onclick="abrirAba('perfil')">👤 Perfil</button>
-        <button class="tab-btn" onclick="abrirAba('projetos')">🚀 Projetos</button>
-        <button class="tab-btn" onclick="abrirAba('habilidades')">💡 Habilidades</button>
-        <button class="tab-btn" onclick="abrirAba('experiencias')">💼 Experiências</button>
-        <button class="tab-btn" onclick="abrirAba('contatos')">📞 Contatos</button>
+        <button class="tab-btn active" onclick="abrirAba('perfil')">Perfil</button>
+        <button class="tab-btn" onclick="abrirAba('projetos')"> Projetos</button>
+        <button class="tab-btn" onclick="abrirAba('habilidades')"> Habilidades</button>
+        <button class="tab-btn" onclick="abrirAba('experiencias')"> Experiências</button>
+        <button class="tab-btn" onclick="abrirAba('contatos')"> Contatos</button>
     </nav>
 
 
@@ -30,7 +30,7 @@
             <input type="text" id="perfilTitulo" placeholder="Título profissional" required>
             <textarea id="perfilBio" placeholder="Sua bio" required></textarea>
             <input type="url" id="perfilLogo" placeholder="URL da logo (opcional)">
-            <button type="submit" class="btn-primary">💾 Salvar Perfil</button>
+            <button type="submit" class="btn-primary"> Salvar Perfil</button>
         </form>
         <div id="perfilInfo" class="info-box"></div>
     </section>
@@ -62,7 +62,7 @@
                 <option value="Intermediário">Intermediário</option>
                 <option value="Avançado">Avançado</option>
             </select>
-            <button type="submit" class="btn-primary">💾 Adicionar Habilidade</button>
+            <button type="submit" class="btn-primary">Adicionar Habilidade</button>
         </form>
         <div id="listaHabilidades"></div>
     </section>
@@ -77,7 +77,7 @@
             <input type="date" id="experienciaDataInicio" required>
             <input type="date" id="experienciaDataFim" required>
             <textarea id="experienciaDescricao" placeholder="Descrição da experiência" required></textarea>
-            <button type="submit" class="btn-primary">💾 Adicionar Experiência</button>
+            <button type="submit" class="btn-primary">Adicionar Experiência</button>
         </form>
         <div id="listaExperiencias"></div>
     </section>
@@ -89,12 +89,12 @@
             <input type="hidden" id="contatoId">
             <input type="text" id="contatoTipo" placeholder="Tipo (ex: GitHub, LinkedIn, Email)" required>
             <input type="url" id="contatoUrl" placeholder="URL" required>
-            <button type="submit" class="btn-primary">💾 Adicionar Contato</button>
+            <button type="submit" class="btn-primary">Adicionar Contato</button>
         </form>
         <div id="listaContatos"></div>
     </section>
 </div>
 
-<script src="/js/admin.js"></script>
+<script src="/static/js/admin.js"></script>
 </body>
 </html>
