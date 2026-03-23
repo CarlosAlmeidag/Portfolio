@@ -12,7 +12,7 @@ async function carregarPerfil(){
         document.getElementById('logo').textContent = perfil.logo;
         document.title = `Portfolio - ${perfil.nome}`;
 
-    }   catch {
+    }   catch (e) {
         console.error('Erro ao carregar perfil', e);
     }
 
