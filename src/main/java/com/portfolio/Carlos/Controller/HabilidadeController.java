@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/habilidades")
+@RequestMapping("/giapi/habilidades")
 public class HabilidadeController {
 
     @Autowired

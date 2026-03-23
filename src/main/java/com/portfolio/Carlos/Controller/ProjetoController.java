@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/projetos")
 public class ProjetoController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class ProjetoController {
         return ResponseEntity.status(201).body(service.salvar(projeto));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         service.deletar(id);
         return ResponseEntity.noContent().build();
