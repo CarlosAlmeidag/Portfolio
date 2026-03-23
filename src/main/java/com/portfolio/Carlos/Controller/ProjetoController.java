@@ -26,6 +26,12 @@ public class ProjetoController {
         return ResponseEntity.status(201).body(service.salvar(projeto));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Projeto> atualizar(@PathVariable Long id, @RequestBody Projeto projeto) {
+        projeto.setId(id);
+        return ResponseEntity.ok(service.salvar(projeto));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         service.deletar(id);

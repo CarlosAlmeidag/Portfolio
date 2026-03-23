@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Portfólio</title>
+    <link rel="stylesheet" href="/css/admin-style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>📋 Painel de Administração</h1>
+        <a href="/" class="btn-voltar">← Voltar ao Portfólio</a>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab-btn active" onclick="abrirAba('perfil')">👤 Perfil</button>
+        <button class="tab-btn" onclick="abrirAba('projetos')">🚀 Projetos</button>
+        <button class="tab-btn" onclick="abrirAba('habilidades')">💡 Habilidades</button>
+        <button class="tab-btn" onclick="abrirAba('experiencias')">💼 Experiências</button>
+        <button class="tab-btn" onclick="abrirAba('contatos')">📞 Contatos</button>
+    </nav>
+
+
+    <section id="perfil" class="aba">
+        <h2>Gerenciar Perfil</h2>
+        <form id="formPerfil" class="form">
+            <input type="hidden" id="perfilId">
+            <input type="text" id="perfilNome" placeholder="Nome completo" required>
+            <input type="text" id="perfilTitulo" placeholder="Título profissional" required>
+            <textarea id="perfilBio" placeholder="Sua bio" required></textarea>
+            <input type="url" id="perfilLogo" placeholder="URL da logo (opcional)">
+            <button type="submit" class="btn-primary">💾 Salvar Perfil</button>
+        </form>
+        <div id="perfilInfo" class="info-box"></div>
+    </section>
+
+
+    <section id="projetos" class="aba hidden">
+        <h2>Gerenciar Projetos</h2>
+        <form id="formProjeto" class="form">
+            <input type="hidden" id="projetoId">
+            <input type="text" id="projetoTitulo" placeholder="Título do projeto" required>
+            <textarea id="projetoDescricao" placeholder="Descrição" required></textarea>
+            <input type="text" id="projetoTecnologias" placeholder="Tecnologias (ex: Java, React, SQL)" required>
+            <input type="url" id="projetoGithub" placeholder="Link GitHub (opcional)">
+            <input type="url" id="projetoDeploy" placeholder="Link Deploy (opcional)">
+            <button type="submit" class="btn-primary">💾 Adicionar Projeto</button>
+        </form>
+        <div id="listaProjetos"></div>
+    </section>
+
+
+    <section id="habilidades" class="aba hidden">
+        <h2>Gerenciar Habilidades</h2>
+        <form id="formHabilidade" class="form">
+            <input type="hidden" id="habilidadeId">
+            <input type="text" id="habilidadeNome" placeholder="Nome da habilidade" required>
+            <select id="habilidadeNivel" required>
+                <option value="">Selecione um nível</option>
+                <option value="Iniciante">Iniciante</option>
+                <option value="Intermediário">Intermediário</option>
+                <option value="Avançado">Avançado</option>
+            </select>
+            <button type="submit" class="btn-primary">💾 Adicionar Habilidade</button>
+        </form>
+        <div id="listaHabilidades"></div>
+    </section>
+
+
+    <section id="experiencias" class="aba hidden">
+        <h2>Gerenciar Experiências</h2>
+        <form id="formExperiencia" class="form">
+            <input type="hidden" id="experienciaId">
+            <input type="text" id="experienciaCargo" placeholder="Cargo" required>
+            <input type="text" id="experienciaEmpresa" placeholder="Empresa" required>
+            <input type="date" id="experienciaDataInicio" required>
+            <input type="date" id="experienciaDataFim" required>
+            <textarea id="experienciaDescricao" placeholder="Descrição da experiência" required></textarea>
+            <button type="submit" class="btn-primary">💾 Adicionar Experiência</button>
+        </form>
+        <div id="listaExperiencias"></div>
+    </section>
+
+
+    <section id="contatos" class="aba hidden">
+        <h2>Gerenciar Contatos</h2>
+        <form id="formContato" class="form">
+            <input type="hidden" id="contatoId">
+            <input type="text" id="contatoTipo" placeholder="Tipo (ex: GitHub, LinkedIn, Email)" required>
+            <input type="url" id="contatoUrl" placeholder="URL" required>
+            <button type="submit" class="btn-primary">💾 Adicionar Contato</button>
+        </form>
+        <div id="listaContatos"></div>
+    </section>
+</div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

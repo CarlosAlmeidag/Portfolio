@@ -1,16 +1,16 @@
-const API = ' ';
+const API = window.location.origin;
 
 async function carregarPerfil(){
     try {
-        const res = await fetch('${API}/api/perfis/1');
+        const res = await fetch(`${API}/api/perfis/1`);
         const perfil = await res.json();
 
 
         document.getElementById('nome').textContent = perfil.nome;
-        document.getElementByid('titulo').textContent = perfil.titulo;
+        document.getElementById('titulo').textContent = perfil.titulo;
         document.getElementById('bio').textContent = perfil.bio;
         document.getElementById('logo').textContent = perfil.logo;
-        document.title = 'Portfolio - ${perfil.nome}';
+        document.title = `Portfolio - ${perfil.nome}`;
 
     }   catch {
         console.error('Erro ao carregar perfil', e);

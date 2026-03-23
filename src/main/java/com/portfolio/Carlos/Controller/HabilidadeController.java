@@ -25,6 +25,12 @@ public class HabilidadeController {
         return ResponseEntity.status(201).body(service.salvar(habilidade));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Habilidade> atualizar(@PathVariable Long id, @RequestBody Habilidade habilidade) {
+        habilidade.setId(id);
+        return ResponseEntity.ok(service.salvar(habilidade));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         service.deletar(id);
