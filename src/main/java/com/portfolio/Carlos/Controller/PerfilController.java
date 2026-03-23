@@ -5,7 +5,6 @@ import com.portfolio.Carlos.model.Perfil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
 
 import java.util.List;
 
@@ -24,10 +23,9 @@ public class PerfilController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Perfil> buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
+
     @PostMapping
     public ResponseEntity<Perfil> criar(@RequestBody Perfil perfil) {
         return ResponseEntity.status(201).body(service.salvar(perfil));
