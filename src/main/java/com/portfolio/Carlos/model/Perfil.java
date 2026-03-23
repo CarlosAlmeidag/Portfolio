@@ -3,6 +3,7 @@ package com.portfolio.Carlos.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @Entity
