@@ -16,7 +16,7 @@ public class Perfil {
     private String nome;
     private String bio;
     private String email;
-    private String fotoPerfil;
+    private String logo;
     private String titulo;
 
     @OneToMany(mappedBy = "perfil", cascade = CascadeType.ALL)

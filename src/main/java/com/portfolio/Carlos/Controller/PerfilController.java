@@ -16,8 +16,8 @@ public class PerfilController {
     private PerfilService service;
 
     @GetMapping
-    public ResponseEntity<List<Perfil>> listar()
-    {
+    public ResponseEntity<List<Perfil>> listar() {
+
         return ResponseEntity.ok(service.listarTodos());
     }
 
@@ -29,6 +29,12 @@ public class PerfilController {
     @PostMapping
     public ResponseEntity<Perfil> criar(@RequestBody Perfil perfil) {
         return ResponseEntity.status(201).body(service.salvar(perfil));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Perfil> atualizar(@PathVariable Long id, @RequestBody Perfil perfil) {
+        perfil.setId(id);
+        return ResponseEntity.ok(service.salvar(perfil));
     }
 
     @DeleteMapping("/{id}")

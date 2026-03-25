@@ -1,13 +1,11 @@
 const API_URL = window.location.origin;
 const PERFIL_ID = 1;
 
-
 const formPerfil = document.getElementById('formPerfil');
 const formProjeto = document.getElementById('formProjeto');
 const formHabilidade = document.getElementById('formHabilidade');
 const formExperiencia = document.getElementById('formExperiencia');
 const formContato = document.getElementById('formContato');
-
 
 document.addEventListener('DOMContentLoaded', () => {
     formPerfil.addEventListener('submit', salvarPerfil);
@@ -23,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarContatos();
 });
 
+// ==================== PERFIL ====================
 
 async function carregarPerfil() {
     try {
@@ -31,10 +30,10 @@ async function carregarPerfil() {
         const perfil = await res.json();
 
         document.getElementById('perfilId').value = perfil.id;
-        document.getElementById('perfilNome').value = perfil.nome;
-        document.getElementById('perfilTitulo').value = perfil.titulo;
-        document.getElementById('perfilBio').value = perfil.bio;
-        document.getElementById('perfilLogo').value = perfil.logo || '';
+        document.getElementById('perfilNome').value = perfil.nome || '';
+        document.getElementById('perfilTitulo').value = perfil.titulo || '';
+        document.getElementById('perfilBio').value = perfil.bio || '';
+        document.getElementById('perfilLogo').value = perfil.fotoPerfil || '';
 
         document.getElementById('perfilInfo').innerHTML = `
             <p><strong>Status:</strong> Perfil carregado</p>
@@ -55,20 +54,18 @@ async function salvarPerfil(e) {
         nome: document.getElementById('perfilNome').value,
         titulo: document.getElementById('perfilTitulo').value,
         bio: document.getElementById('perfilBio').value,
-        logo: document.getElementById('perfilLogo').value
+        fotoPerfil: document.getElementById('perfilLogo').value
     };
 
     try {
         let res;
         if (id) {
-            // Editar
             res = await fetch(`${API_URL}/api/perfis/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(perfil)
             });
         } else {
-            // Criar
             res = await fetch(`${API_URL}/api/perfis`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -85,6 +82,7 @@ async function salvarPerfil(e) {
     }
 }
 
+// ==================== PROJETOS ====================
 
 async function carregarProjetos() {
     try {
@@ -102,7 +100,7 @@ async function carregarProjetos() {
                 <h3>${p.titulo}</h3>
                 <p>${p.descricao}</p>
                 <p><strong>Tecnologias:</strong> ${p.tecnologias}</p>
-                ${p.linkGithub ? `<p><a href="${p.linkGithub}" target="_blank">🔗 GitHub</a></p>` : ''}
+                ${p.linkGitHub ? `<p><a href="${p.linkGitHub}" target="_blank">🔗 GitHub</a></p>` : ''}
                 ${p.linkDeploy ? `<p><a href="${p.linkDeploy}" target="_blank">🚀 Deploy</a></p>` : ''}
                 <div class="actions">
                     <button onclick="editarProjeto(${p.id})" class="btn-edit">✏️ Editar</button>
@@ -120,24 +118,23 @@ async function salvarProjeto(e) {
     const id = document.getElementById('projetoId').value;
 
     const projeto = {
-        perfilId: PERFIL_ID,
         titulo: document.getElementById('projetoTitulo').value,
         descricao: document.getElementById('projetoDescricao').value,
         tecnologias: document.getElementById('projetoTecnologias').value,
-        linkGithub: document.getElementById('projetoGithub').value,
+        linkGitHub: document.getElementById('projetoGithub').value,
         linkDeploy: document.getElementById('projetoDeploy').value
     };
 
     try {
         let res;
         if (id) {
-            res = await fetch(`${API_URL}/api/projetos/${id}`, {
+            res = await fetch(`${API_URL}/api/projetos/${id}?perfilId=${PERFIL_ID}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(projeto)
             });
         } else {
-            res = await fetch(`${API_URL}/api/projetos`, {
+            res = await fetch(`${API_URL}/api/projetos?perfilId=${PERFIL_ID}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(projeto)
@@ -164,7 +161,7 @@ async function editarProjeto(id) {
         document.getElementById('projetoTitulo').value = projeto.titulo;
         document.getElementById('projetoDescricao').value = projeto.descricao;
         document.getElementById('projetoTecnologias').value = projeto.tecnologias;
-        document.getElementById('projetoGithub').value = projeto.linkGithub || '';
+        document.getElementById('projetoGithub').value = projeto.linkGitHub || '';
         document.getElementById('projetoDeploy').value = projeto.linkDeploy || '';
 
         abrirAba('projetos');
@@ -188,6 +185,7 @@ async function deletarProjeto(id) {
     }
 }
 
+// ==================== HABILIDADES ====================
 
 async function carregarHabilidades() {
     try {
@@ -219,7 +217,6 @@ async function salvarHabilidade(e) {
     const id = document.getElementById('habilidadeId').value;
 
     const habilidade = {
-        perfilId: PERFIL_ID,
         nome: document.getElementById('habilidadeNome').value,
         nivel: document.getElementById('habilidadeNivel').value
     };
@@ -227,13 +224,13 @@ async function salvarHabilidade(e) {
     try {
         let res;
         if (id) {
-            res = await fetch(`${API_URL}/api/habilidades/${id}`, {
+            res = await fetch(`${API_URL}/api/habilidades/${id}?perfilId=${PERFIL_ID}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(habilidade)
             });
         } else {
-            res = await fetch(`${API_URL}/api/habilidades`, {
+            res = await fetch(`${API_URL}/api/habilidades?perfilId=${PERFIL_ID}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(habilidade)
@@ -281,6 +278,7 @@ async function deletarHabilidade(id) {
     }
 }
 
+// ==================== EXPERIÊNCIAS ====================
 
 async function carregarExperiencias() {
     try {
@@ -315,7 +313,6 @@ async function salvarExperiencia(e) {
     const id = document.getElementById('experienciaId').value;
 
     const experiencia = {
-        perfilId: PERFIL_ID,
         cargo: document.getElementById('experienciaCargo').value,
         empresa: document.getElementById('experienciaEmpresa').value,
         dataInicio: document.getElementById('experienciaDataInicio').value,
@@ -326,13 +323,13 @@ async function salvarExperiencia(e) {
     try {
         let res;
         if (id) {
-            res = await fetch(`${API_URL}/api/experiencias/${id}`, {
+            res = await fetch(`${API_URL}/api/experiencias/${id}?perfilId=${PERFIL_ID}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(experiencia)
             });
         } else {
-            res = await fetch(`${API_URL}/api/experiencias`, {
+            res = await fetch(`${API_URL}/api/experiencias?perfilId=${PERFIL_ID}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(experiencia)
@@ -384,6 +381,7 @@ async function deletarExperiencia(id) {
 }
 
 // ==================== CONTATOS ====================
+
 async function carregarContatos() {
     try {
         const res = await fetch(`${API_URL}/api/contatos/perfil/${PERFIL_ID}`);
@@ -414,7 +412,6 @@ async function salvarContato(e) {
     const id = document.getElementById('contatoId').value;
 
     const contato = {
-        perfilId: PERFIL_ID,
         tipo: document.getElementById('contatoTipo').value,
         url: document.getElementById('contatoUrl').value
     };
@@ -422,13 +419,13 @@ async function salvarContato(e) {
     try {
         let res;
         if (id) {
-            res = await fetch(`${API_URL}/api/contatos/${id}`, {
+            res = await fetch(`${API_URL}/api/contatos/${id}?perfilId=${PERFIL_ID}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(contato)
             });
         } else {
-            res = await fetch(`${API_URL}/api/contatos`, {
+            res = await fetch(`${API_URL}/api/contatos?perfilId=${PERFIL_ID}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(contato)
@@ -476,17 +473,11 @@ async function deletarContato(id) {
     }
 }
 
+// ==================== ABAS ====================
 
 function abrirAba(abaName) {
-
     document.querySelectorAll('.aba').forEach(aba => aba.classList.add('hidden'));
-
-
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-
     document.getElementById(abaName).classList.remove('hidden');
-
-
     event.target.classList.add('active');
 }

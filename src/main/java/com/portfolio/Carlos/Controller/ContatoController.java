@@ -3,8 +3,8 @@ package com.portfolio.Carlos.Controller;
 import com.portfolio.Carlos.Service.ContatoService;
 import com.portfolio.Carlos.model.Contato;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +20,23 @@ public class ContatoController {
         return ResponseEntity.ok(service.listarPorPerfil(perfilId));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Contato> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
     @PostMapping
-    public ResponseEntity<Contato> criar(@RequestBody Contato contato) {
-        return ResponseEntity.status(201).body(service.salvar(contato));
+    public ResponseEntity<Contato> criar(@RequestBody Contato contato,
+                                          @RequestParam Long perfilId) {
+        return ResponseEntity.status(201).body(service.salvar(contato, perfilId));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Contato> atualizar(@PathVariable Long id,
+                                              @RequestBody Contato contato,
+                                              @RequestParam Long perfilId) {
+        contato.setId(id);
+        return ResponseEntity.ok(service.salvar(contato, perfilId));
     }
 
     @DeleteMapping("/{id}")
